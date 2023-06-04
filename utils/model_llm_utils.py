@@ -1,6 +1,6 @@
 from transformers import pipeline, AutoModelForCausalLM, AutoTokenizer, StoppingCriteria, StoppingCriteriaList
 import torch
-from optimum import BetterTransformer
+from optimum.bettertransformer import BetterTransformer
 
 class KeywordsStoppingCriteria(StoppingCriteria):
     def __init__(self, keywords_ids:list):
