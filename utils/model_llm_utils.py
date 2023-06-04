@@ -1,5 +1,6 @@
 from transformers import pipeline, AutoModelForCausalLM, AutoTokenizer, StoppingCriteria, StoppingCriteriaList
 import torch
+from optimum import BetterTransformer
 
 class KeywordsStoppingCriteria(StoppingCriteria):
     def __init__(self, keywords_ids:list):
@@ -13,6 +14,8 @@ class KeywordsStoppingCriteria(StoppingCriteria):
 # Load the model stored in models/llm-model
 print(f"Starting to load the LLM model")
 model = AutoModelForCausalLM.from_pretrained('models/llm-model', local_files_only=True, torch_dtype=torch.bfloat16, device_map="auto")
+model = BetterTransformer(model, keep_original_model=False)
+# model = AutoModelForCausalLM.from_pretrained('models/llm-model', local_files_only=True, load_in_8bit=True, device_map="auto")
 
 print(f"Starting to load the LLM tokenizer")
 tokenizer = AutoTokenizer.from_pretrained('models/llm-model', local_files_only=True, padding_side="left")
