@@ -5,3 +5,6 @@ gradio
 transformers
 torch
 accelerate
+bitsandbytes
+# ensure that milvus and pymilvus have same version
+optimum
